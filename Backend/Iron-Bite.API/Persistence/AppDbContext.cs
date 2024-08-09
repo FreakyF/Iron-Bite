@@ -1,9 +1,12 @@
-﻿using Iron_Bite.API.Entities;
+﻿using Iron_Bite.API.Features.Ingredients.Entities;
+using Iron_Bite.API.Features.IngredientsMeals.Entities;
+using Iron_Bite.API.Features.Meals.Entities;
+using Iron_Bite.API.Features.Nutrients.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace Iron_Bite.API.Persistence;
 
-public class AppDbContext(DbContextOptions options) : DbContext(options), IAppDbContext
+public class AppDbContext(DbContextOptions options) : DbContext(options)
 {
 	public DbSet<Ingredient> Ingredients { get; set; } = null!;
 	public DbSet<Meal> Meals { get; set; } = null!;
