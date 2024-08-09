@@ -1,3 +1,5 @@
+using Iron_Bite.API.Models;
+
 namespace Iron_Bite.API.Entities;
 
 public class IngredientMeal : BaseEntity
@@ -6,5 +8,5 @@ public class IngredientMeal : BaseEntity
     public required Meal Meal { get; init; }
     public required Guid IngredientId { get; init; }
     public required Ingredient Ingredient { get; init; }
-    public required string Quantity { get; set; }
+    public required Quantity Quantity { get; set; }
 }
