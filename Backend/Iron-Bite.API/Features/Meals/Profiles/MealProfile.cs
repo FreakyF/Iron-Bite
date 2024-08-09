@@ -10,5 +10,6 @@ public class MealProfile : Profile
 	public MealProfile()
 	{
 		CreateMap<Meal, MealDto>();
+		CreateMap<MealDto, Meal>();
 	}
 }

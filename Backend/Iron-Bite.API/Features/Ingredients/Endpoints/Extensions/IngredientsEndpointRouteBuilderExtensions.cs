@@ -10,7 +10,7 @@ public static class IngredientsEndpointRouteBuilderExtensions
 		baseIngredientsRoute.MapGet("", IngredientsEndpoints.GetIngredientsAsync);
 		baseIngredientsRoute.MapPost("", IngredientsEndpoints.CreateIngredientAsync);
 
-		singleIngredientRoute.MapGet("", IngredientsEndpoints.GetIngredientByIdAsync);
+		singleIngredientRoute.MapGet("", IngredientsEndpoints.GetIngredientByIdAsync).WithName("GetIngredient");
 		singleIngredientRoute.MapPut("", IngredientsEndpoints.UpdateIngredientAsync);
 		singleIngredientRoute.MapDelete("", IngredientsEndpoints.DeleteIngredientAsync);
 	}

@@ -10,7 +10,7 @@ public static class NutrientsEndpointRouteBuilderExtensions
 		baseNutrientsRoute.MapGet("", NutrientsEndpoints.GetNutrientsAsync);
 		baseNutrientsRoute.MapPost("", NutrientsEndpoints.CreateNutrientAsync);
 
-		singleNutrientRoute.MapGet("", NutrientsEndpoints.GetNutrientByIdAsync);
+		singleNutrientRoute.MapGet("", NutrientsEndpoints.GetNutrientByIdAsync).WithName("GetNutrient");
 		singleNutrientRoute.MapPut("", NutrientsEndpoints.UpdateNutrientAsync);
 		singleNutrientRoute.MapDelete("", NutrientsEndpoints.DeleteNutrientAsync);
 	}

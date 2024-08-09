@@ -10,7 +10,7 @@ public static class MealsEndpointRouteBuilderExtensions
 		baseMealsRoute.MapGet("", MealsEndpoints.GetMealsAsync);
 		baseMealsRoute.MapPost("", MealsEndpoints.CreateMealAsync);
 
-		singleMealRoute.MapGet("", MealsEndpoints.GetMealByIdAsync);
+		singleMealRoute.MapGet("", MealsEndpoints.GetMealByIdAsync).WithName("GetMeal");
 		singleMealRoute.MapPut("", MealsEndpoints.UpdateMealAsync);
 		singleMealRoute.MapDelete("", MealsEndpoints.DeleteMealAsync);
 	}

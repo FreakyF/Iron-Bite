@@ -10,7 +10,7 @@ public static class IngredientsMealsEndpointRouteBuilderExtensions
 		baseIngredientsMealsRoute.MapGet("", IngredientsMealsMealsEndpoints.GetIngredientsMealsMealsAsync);
 		baseIngredientsMealsRoute.MapPost("", IngredientsMealsMealsEndpoints.CreateIngredientMealAsync);
 
-		singleIngredientMealRoute.MapGet("", IngredientsMealsMealsEndpoints.GetIngredientMealByIdAsync);
+		singleIngredientMealRoute.MapGet("", IngredientsMealsMealsEndpoints.GetIngredientMealByIdAsync).WithName("GetIngredientMeal");
 		singleIngredientMealRoute.MapPut("", IngredientsMealsMealsEndpoints.UpdateIngredientMealAsync);
 		singleIngredientMealRoute.MapDelete("", IngredientsMealsMealsEndpoints.DeleteIngredientMealAsync);
 	}
