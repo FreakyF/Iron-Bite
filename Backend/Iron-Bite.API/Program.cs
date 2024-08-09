@@ -1,3 +1,8 @@
+using AutoMapper;
+using Iron_Bite.API.Features.Ingredients.Dtos;
+using Iron_Bite.API.Features.IngredientsMeals.Dtos;
+using Iron_Bite.API.Features.Meals.Dtos;
+using Iron_Bite.API.Features.Nutrients.Dtos;
 using Iron_Bite.API.Persistence;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,34 +19,37 @@ var app = builder.Build();
 
 app.UseHttpsRedirection();
 
-app.MapGet("/meals", async (AppDbContext appDbContext) => await appDbContext.Meals.ToListAsync());
-app.MapGet("/ingredients", async (AppDbContext appDbContext) => await appDbContext.Ingredients.ToListAsync());
-app.MapGet("/nutrients", async (AppDbContext appDbContext) => await appDbContext.Nutrients.ToListAsync());
-app.MapGet("/ingredientsmeals",
-	async (AppDbContext appDbContext) => await appDbContext.IngredientsMeals.ToListAsync());
+app.MapGet("/meals",
+	async (AppDbContext appDbContext, IMapper mapper) =>
+		mapper.Map<IEnumerable<MealDto>>(await appDbContext.Meals.ToListAsync()));
 
-app.MapGet("/meals/{mealId:guid}", async (AppDbContext appDbContext, Guid mealId) =>
-{
-	return await appDbContext.Meals
-		.FirstOrDefaultAsync(m => m.Id == mealId);
-});
+app.MapGet("/ingredients", async (AppDbContext appDbContext, IMapper mapper) =>
+	mapper.Map<IEnumerable<IngredientDto>>(await appDbContext.Ingredients.ToListAsync()));
 
-app.MapGet("/ingredients/{ingredientId:guid}", async (AppDbContext appDbContext, Guid ingredientId) =>
-{
-	return await appDbContext.Ingredients
-		.FirstOrDefaultAsync(i => i.Id == ingredientId);
-});
+app.MapGet("/nutrients", async (AppDbContext appDbContext, IMapper mapper) =>
+	mapper.Map<IEnumerable<NutrientDto>>(await appDbContext.Nutrients.ToListAsync()));
 
-app.MapGet("/nutrients/{nutrientId:guid}", async (AppDbContext appDbContext, Guid nutrientId) =>
-{
-	return await appDbContext.Nutrients
-		.FirstOrDefaultAsync(n => n.Id == nutrientId);
-});
+app.MapGet("/ingredientsmeals", async (AppDbContext appDbContext, IMapper mapper) =>
+	mapper.Map<IEnumerable<IngredientMealDto>>(await appDbContext.IngredientsMeals.ToListAsync()));
 
-app.MapGet("/ingredientsmeals/{ingredientmealId:guid}", async (AppDbContext appDbContext, Guid ingredientmealId) =>
-{
-	return await appDbContext.IngredientsMeals
-		.FirstOrDefaultAsync(i => i.Id == ingredientmealId);
-});
+app.MapGet("/meals/{mealId:guid}",
+	async (AppDbContext appDbContext, IMapper mapper, Guid mealId) => mapper.Map<MealDto>(
+		await appDbContext.Meals
+			.FirstOrDefaultAsync(m => m.Id == mealId)));
+
+app.MapGet("/ingredients/{ingredientId:guid}",
+	async (AppDbContext appDbContext, IMapper mapper, Guid ingredientId) => mapper.Map<IngredientDto>(
+		await appDbContext.Ingredients
+			.FirstOrDefaultAsync(i => i.Id == ingredientId)));
+
+app.MapGet("/nutrients/{nutrientId:guid}",
+	async (AppDbContext appDbContext, IMapper mapper, Guid nutrientId) => mapper.Map<NutrientDto>(
+		await appDbContext.Nutrients
+			.FirstOrDefaultAsync(n => n.Id == nutrientId)));
+
+app.MapGet("/ingredientsmeals/{ingredientmealId:guid}",
+	async (AppDbContext appDbContext, IMapper mapper, Guid ingredientmealId) => mapper.Map<IngredientMealDto>(
+		await appDbContext.IngredientsMeals
+			.FirstOrDefaultAsync(i => i.Id == ingredientmealId)));
 
 await app.RunAsync();
