@@ -1,4 +1,5 @@
 ﻿using Iron_Bite.API.Features.IngredientsMeals.Entities;
+using Iron_Bite.API.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -13,6 +14,12 @@ public class IngredientMealTypeConfiguration : IEntityTypeConfiguration<Ingredie
 			{
 				q.Property(p => p.Value)
 					.HasPrecision(5, 2);
+
+				q.Property(p => p.Unit)
+					.HasConversion(
+						v => (int)v,
+						v => Enum.IsDefined(typeof(MeasurementUnit), v) ? (MeasurementUnit)v : default
+					);
 			});
 	}
 }

@@ -4,6 +4,7 @@ using Iron_Bite.API.Features.Meals.Entities;
 
 namespace Iron_Bite.API.Features.Meals.Profiles;
 
+// ReSharper disable once UnusedType.Global
 public class MealProfile : Profile
 {
 	public MealProfile()

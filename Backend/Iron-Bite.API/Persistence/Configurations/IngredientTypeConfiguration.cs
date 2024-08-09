@@ -1,5 +1,4 @@
 ﻿using Iron_Bite.API.Features.Ingredients.Entities;
-using Iron_Bite.API.Features.Meals.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

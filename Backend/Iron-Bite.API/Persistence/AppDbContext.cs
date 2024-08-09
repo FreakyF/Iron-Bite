@@ -9,10 +9,10 @@ namespace Iron_Bite.API.Persistence;
 
 public class AppDbContext(DbContextOptions options) : DbContext(options)
 {
-	public DbSet<Ingredient> Ingredients { get; set; } = null!;
-	public DbSet<Meal> Meals { get; set; } = null!;
-	public DbSet<Nutrient> Nutrients { get; set; } = null!;
-	public DbSet<IngredientMeal> IngredientsMeals { get; set; } = null!;
+	public DbSet<Ingredient> Ingredients { get; init; } = null!;
+	public DbSet<Meal> Meals { get; init; } = null!;
+	public DbSet<Nutrient> Nutrients { get; init; } = null!;
+	public DbSet<IngredientMeal> IngredientsMeals { get; init; } = null!;
 
 	protected override void OnModelCreating(ModelBuilder modelBuilder)
 	{

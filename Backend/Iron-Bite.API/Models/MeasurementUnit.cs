@@ -1,5 +1,8 @@
-﻿namespace Iron_Bite.API.Models;
+﻿using System.Diagnostics.CodeAnalysis;
 
+namespace Iron_Bite.API.Models;
+
+[SuppressMessage("ReSharper", "UnusedMember.Global")]
 public enum MeasurementUnit
 {
 	Kilogram,

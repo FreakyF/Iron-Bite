@@ -2,15 +2,16 @@
 
 public static class MealsEndpointRouteBuilderExtensions
 {
-	public static void RegisterMealsEndpoints(this IEndpointRouteBuilder endpointRouteBuilder)
+	public static void RegisterMealsEndpoints(this IEndpointRouteBuilder routes)
 	{
-		var mealsEndpoints = endpointRouteBuilder.MapGroup("/meals");
-		var mealsWithGuidIdEndpoints = endpointRouteBuilder.MapGroup("/meals/{mealId:guid}");
+		var baseMealsRoute = routes.MapGroup("/meals");
+		var singleMealRoute = baseMealsRoute.MapGroup("/{mealId:guid}");
 
-		mealsEndpoints.MapGet("", MealsEndpoints.GetMealsAsync);
-		mealsWithGuidIdEndpoints.MapGet("", MealsEndpoints.GetMealByIdAsync);
-		mealsEndpoints.MapPost("", MealsEndpoints.CreateMealAsync);
-		mealsWithGuidIdEndpoints.MapPut("", MealsEndpoints.UpdateMealAsync);
-		mealsWithGuidIdEndpoints.MapDelete("", MealsEndpoints.DeleteMealAsync);
+		baseMealsRoute.MapGet("", MealsEndpoints.GetMealsAsync);
+		baseMealsRoute.MapPost("", MealsEndpoints.CreateMealAsync);
+
+		singleMealRoute.MapGet("", MealsEndpoints.GetMealByIdAsync);
+		singleMealRoute.MapPut("", MealsEndpoints.UpdateMealAsync);
+		singleMealRoute.MapDelete("", MealsEndpoints.DeleteMealAsync);
 	}
 }

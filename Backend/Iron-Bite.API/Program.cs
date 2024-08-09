@@ -1,5 +1,7 @@
-using System.Net;
+using Iron_Bite.API.Features.Ingredients.Endpoints.Extensions;
+using Iron_Bite.API.Features.IngredientsMeals.Endpoints.Extensions;
 using Iron_Bite.API.Features.Meals.Endpoints.Extensions;
+using Iron_Bite.API.Features.Nutrients.Endpoints.Extensions;
 using Iron_Bite.API.Persistence;
 using Microsoft.EntityFrameworkCore;
 
@@ -16,13 +18,12 @@ builder.Services.AddProblemDetails();
 
 var app = builder.Build();
 
-if (!app.Environment.IsDevelopment())
-{
-	app.UseExceptionHandler();
-}
-
+if (!app.Environment.IsDevelopment()) app.UseExceptionHandler();
 
 app.UseHttpsRedirection();
 app.RegisterMealsEndpoints();
+app.RegisterIngredientsEndpoints();
+app.RegisterNutrientsEndpoints();
+app.RegisterIngredientsMealsEndpoints();
 
 await app.RunAsync();

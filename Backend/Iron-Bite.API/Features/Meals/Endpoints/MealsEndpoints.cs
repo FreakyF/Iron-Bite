@@ -26,19 +26,20 @@ public static class MealsEndpoints
 
 	public static async Task<IResult> CreateMealAsync(AppDbContext appDbContext, IMapper mapper, MealDto mealDto)
 	{
-		var mealEntity = mapper.Map<Meal>(mealDto);
-		await appDbContext.Meals.AddAsync(mealEntity);
+		var meal = mapper.Map<Meal>(mealDto);
+		await appDbContext.Meals.AddAsync(meal);
 		await appDbContext.SaveChangesAsync();
 
-		return Results.CreatedAtRoute("GetMeal", new { mealId = mealEntity.Id }, mapper.Map<MealDto>(mealEntity));
+		return Results.CreatedAtRoute("GetMeal", new { mealId = meal.Id }, mapper.Map<MealDto>(meal));
 	}
 
-	public static async Task<IResult> UpdateMealAsync(AppDbContext appDbContext, IMapper mapper, Guid mealId, MealDto mealDto)
+	public static async Task<IResult> UpdateMealAsync(AppDbContext appDbContext, IMapper mapper, Guid mealId,
+		MealDto mealDto)
 	{
-		var mealEntity = await appDbContext.Meals.FindAsync(mealId);
-		if (mealEntity is null) return TypedResults.NotFound();
+		var meal = await appDbContext.Meals.FindAsync(mealId);
+		if (meal is null) return TypedResults.NotFound();
 
-		mapper.Map(mealDto, mealEntity);
+		mapper.Map(mealDto, meal);
 		await appDbContext.SaveChangesAsync();
 
 		return TypedResults.NoContent();
@@ -46,10 +47,10 @@ public static class MealsEndpoints
 
 	public static async Task<IResult> DeleteMealAsync(AppDbContext appDbContext, IMapper mapper, Guid mealId)
 	{
-		var mealEntity = await appDbContext.Meals.FindAsync(mealId);
-		if (mealEntity is null) return TypedResults.NotFound();
+		var meal = await appDbContext.Meals.FindAsync(mealId);
+		if (meal is null) return TypedResults.NotFound();
 
-		appDbContext.Meals.Remove(mealEntity);
+		appDbContext.Meals.Remove(meal);
 		await appDbContext.SaveChangesAsync();
 		return TypedResults.NoContent();
 	}

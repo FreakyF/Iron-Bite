@@ -7,7 +7,7 @@ public class Nutrient : BaseEntity
 {
 	public required Guid IngredientId { get; init; }
 	public required Ingredient Ingredient { get; init; }
-	public required decimal Protein { get; set; }
-	public required decimal Carbohydrates { get; set; }
-	public required decimal Fats { get; set; }
+	public required decimal Protein { get; init; }
+	public required decimal Carbohydrates { get; init; }
+	public required decimal Fats { get; init; }
 }
