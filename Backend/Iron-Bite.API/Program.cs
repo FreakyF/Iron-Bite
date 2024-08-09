@@ -1,7 +1,5 @@
-using Iron_Bite.API.Features.Ingredients.Endpoints;
-using Iron_Bite.API.Features.IngredientsMeals.Endpoints;
-using Iron_Bite.API.Features.Meals.Endpoints;
-using Iron_Bite.API.Features.Nutrients.Endpoints;
+using System.Net;
+using Iron_Bite.API.Features.Meals.Endpoints.Extensions;
 using Iron_Bite.API.Persistence;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,13 +12,17 @@ builder.Services.AddDbContext<AppDbContext>(o =>
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
+builder.Services.AddProblemDetails();
+
 var app = builder.Build();
 
-app.UseHttpsRedirection();
+if (!app.Environment.IsDevelopment())
+{
+	app.UseExceptionHandler();
+}
 
-app.MapMealsEndpoints();
-app.MapNutrientsEndpoints();
-app.MapIngredientsEndpoints();
-app.MapIngredientsMealsEndpoints();
+
+app.UseHttpsRedirection();
+app.RegisterMealsEndpoints();
 
 await app.RunAsync();
