@@ -8,5 +8,5 @@ public interface IAppDbContext
 	public DbSet<Ingredient> Ingredients { get; set; }
 	public DbSet<Meal> Meals { get; set; }
 	public DbSet<Nutrient> Nutrients { get; set; }
-	public DbSet<IngredientMeal> IngredientMeals { get; set; }
+	public DbSet<IngredientMeal> IngredientsMeals { get; set; }
 }

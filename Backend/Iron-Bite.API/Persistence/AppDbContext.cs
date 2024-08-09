@@ -8,7 +8,7 @@ public class AppDbContext(DbContextOptions options) : DbContext(options), IAppDb
 	public DbSet<Ingredient> Ingredients { get; set; } = null!;
 	public DbSet<Meal> Meals { get; set; } = null!;
 	public DbSet<Nutrient> Nutrients { get; set; } = null!;
-	public DbSet<IngredientMeal> IngredientMeals { get; set; } = null!;
+	public DbSet<IngredientMeal> IngredientsMeals { get; set; } = null!;
 
 	protected override void OnModelCreating(ModelBuilder modelBuilder)
 	{
