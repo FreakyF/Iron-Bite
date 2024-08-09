@@ -3,13 +3,21 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddDbContext<IAppDbContext, AppDbContext>(options =>
+builder.Services.AddDbContext<IAppDbContext, AppDbContext>(o =>
 {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("IronBiteDb"));
+	o.UseSqlServer(builder.Configuration.GetConnectionString("IronBiteDb"));
 });
 
 var app = builder.Build();
 
 app.UseHttpsRedirection();
 
-app.Run();
+app.MapGet("/meals", async (IAppDbContext appDbContext) => await appDbContext.Meals.ToListAsync());
+
+app.MapGet("/meals/{mealId:guid}", async (IAppDbContext appDbContext, Guid mealId) =>
+{
+	return await appDbContext.Meals
+		.FirstOrDefaultAsync(m => m.Id == mealId);
+});
+
+await app.RunAsync();
