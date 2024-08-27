@@ -1,4 +1,4 @@
-export enum IMeasurementUnit {
+export enum MeasurementUnit {
   Kilogram = 'Kilogram',
   Gram = 'Gram',
   Piece = 'Piece',
