@@ -1,7 +1,7 @@
-import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
+import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 
-import { MealTableComponent } from './meal-table.component';
+import {MealTableComponent} from './meal-table.component';
 
 describe('MealTableComponent', () => {
   let component: MealTableComponent;

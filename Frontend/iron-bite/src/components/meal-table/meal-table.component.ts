@@ -1,8 +1,9 @@
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
-import { MatTableModule, MatTable } from '@angular/material/table';
-import { MatPaginatorModule, MatPaginator } from '@angular/material/paginator';
-import { MatSortModule, MatSort } from '@angular/material/sort';
-import { MealTableDataSource, MealTableItem } from './meal-table-datasource';
+import {AfterViewInit, Component, ViewChild} from '@angular/core';
+import {MatTable, MatTableModule} from '@angular/material/table';
+import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
+import {MatSort, MatSortModule} from '@angular/material/sort';
+import {MealTableDataSource} from './meal-table-datasource';
+import {IMeal} from "../../app/models/meal";
 
 @Component({
   selector: 'app-meal-table',
@@ -14,7 +15,7 @@ import { MealTableDataSource, MealTableItem } from './meal-table-datasource';
 export class MealTableComponent implements AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-  @ViewChild(MatTable) table!: MatTable<MealTableItem>;
+  @ViewChild(MatTable) table!: MatTable<IMeal>;
   dataSource = new MealTableDataSource();
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
